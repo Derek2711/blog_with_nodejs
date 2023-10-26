@@ -8,7 +8,7 @@
   --font-size-base: 1rem;
   --font-size-md: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
   --font-size-lg: clamp(1.56rem, 1vw + 1.31rem, 2.11rem);
-  --font-size-xl: clamp(40px, 2.38vw + 30px, 60px);
+  --font-size-xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
   --border-radius: 10px;
 }
 
@@ -25,7 +25,7 @@ a {
   color: var(--black);
 }
 h1 {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-xl) !important;
 }
 h2 {
   font-size: var(--font-size-lg);
@@ -169,4 +169,104 @@ img {
 }
 .header_nav ul a.active {
   color: var(--gray);
+}
+
+/* Author => Homepage */
+.author {
+  padding: 10px 0;
+  text-align: center;
+}
+
+.author_heading {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.author_body {
+  font-size: var(--font-size-md);
+  margin: 5px 0 40px 0;
+}
+
+/* Home article list */
+.article_heading {
+  margin-top: 4rem;
+  font-weight: 400;
+}
+
+.article-ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: clamp(1.33rem, calc(1.28rem + 0.22vw), 1.5rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.article-list_date {
+  font-size: var(--font-size-base);
+  color: var(--gray);
+  width: 260px;
+  display: inline-block;
+}
+
+.article-ul li a {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-decoration: none;
+  margin: 18px 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .article-ul li a {
+    flex-direction: row;
+    align-items: center;
+  }
+  .article-list_date {
+    text-align: right;
+  }
+}
+
+.article-ul li {
+  font-size: 24px;
+  cursor: pointer;
+  transition: filter 0.1s;
+}
+
+.article-ul li:not(:last-child) {
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.article-ul li:hover {
+  filter: none;
+}
+
+.article-ul:hover li {
+  filter: blur(3px);
+}
+
+.article-ul:hover li:hover {
+  filter: none;
+}
+
+.pagination {
+  font-size: 1.3rem;
+  color: var(--gray);
+  text-decoration: none;
+  margin-top: 40px;
+  display: inline-block;
+}
+
+.pagination:hover {
+  color: var(--black);
+}
+
+.article {
+  white-space: pre-wrap;
+}
+
+/* Footer */
+.footer {
+  margin: 4rem;
+  text-align: center;
 }
