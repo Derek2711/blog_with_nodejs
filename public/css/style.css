@@ -242,11 +242,16 @@ img {
 }
 
 .article-ul:hover li {
-  filter: blur(3px);
+  filter: blur(1px);
 }
 
 .article-ul:hover li:hover {
   filter: none;
+}
+
+.justify-between {
+  display: flex;
+  justify-content: space-between;
 }
 
 .pagination {
@@ -287,12 +292,12 @@ img {
   transition: transform 0.01s;
 }
 
-.searchBar input{
+.searchBar input {
   margin: 0;
   padding: 0;
 }
 
-#searchClose{
+#searchClose {
   position: absolute;
   top: 0;
   right: 0;
@@ -316,13 +321,13 @@ img {
   display: inline-block;
 }
 
-.admin-post-controls .btn  {
+.admin-post-controls .btn {
   display: inline-block;
   background-color: var(--black);
   color: var(--gray-light);
   border: 0;
   text-decoration: none;
-  font-size: .8rem;
+  font-size: 0.8rem;
   padding: 4px 8px;
   line-height: 2;
 }
