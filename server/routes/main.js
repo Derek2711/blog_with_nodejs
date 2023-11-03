@@ -1,7 +1,11 @@
-const express = require(`express`)
-const router = express.Router()
-const Post = require("../models/Post")
+const express = require(`express`);
+const router = express.Router();
+const Post = require("../models/Post");
 
+// Logging
+const morgan = require(`morgan`);
+
+router.use(morgan(`dev`));
 
 /**
  * GET/
@@ -53,14 +57,14 @@ router.get(`/post/:id`, async (req, res) => {
         const local = {
             title: data.title,
         }
-        
+
         res.render(`post`, { local, data })
 
     } catch (error) {
         console.log(`ERROR : ${error}`)
     }
 
-})
+});
 
 
 router.get(`/about`, (req, res) => {
