@@ -40,6 +40,29 @@ router.get(``, async (req, res) => {
 });
 
 
+/**
+ * GET/
+ * Post : _id
+ */
+
+router.get(`/post/:id`, async (req, res) => {
+    try {
+        let slug = req.params.id
+        const data = await Post.findById({ _id: slug })
+
+        const local = {
+            title: data.title,
+        }
+        
+        res.render(`post`, { local, data })
+
+    } catch (error) {
+        console.log(`ERROR : ${error}`)
+    }
+
+})
+
+
 router.get(`/about`, (req, res) => {
     res.render(`about`)
 })
