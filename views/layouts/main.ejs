@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= locals.title %></title>
-    <meta name="description" content="<%= locals.desc %>">
+    <title><%= local.title %></title>
+    <meta name="description" content="<%= local.desc %>">
     <link rel="shortcut icon" type="x-icon" href="/img/blog.png">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -13,7 +13,7 @@
 <body>
     <%- include("../partials/search.ejs")  %>
         <div class="container">
-            <%- include("../partials/header.ejs")  %>
+            <%- include("../partials/header.ejs") %>
         <main class="main">
             <%- body %>
         </main>
