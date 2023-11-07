@@ -14,6 +14,9 @@ const PORT = 8000 || process.env.PORT
 // Connect to MongoDB
 connectDB()
 
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
 // Public folder for js, css, images
 app.use(express.static(`public`))
 
