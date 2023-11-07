@@ -1,10 +1,11 @@
 // Require .env as config
 require(`dotenv`).config()
 
+const router = require(`./server/routes/main`)
+const connectDB = require(`./server/config/db`)
+
 const express = require(`express`)
 const expresslayout = require(`express-ejs-layouts`)
-
-const connectDB = require(`./server/config/db`)
 
 const app = express()
 // || Port for production in server
@@ -22,7 +23,7 @@ app.set(`layout`, `./layouts/main`)
 app.set(`view engine`, `ejs`)
 
 // For routes components
-app.use(`/`, require(`./server/routes/main`))
+app.use(`/`, router)
 
 app.listen(PORT, () => {
     console.log(`Server is running at port ${PORT}`)

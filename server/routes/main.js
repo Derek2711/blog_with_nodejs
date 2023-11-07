@@ -17,11 +17,7 @@ const local = {
     desc: `Building a blog with Node, Express and MongoDB`
 }
 
-router.get(``, (req, res) => {
-    res.redirect(`all-post`)
-})
-
-router.get(`/all-post`, async (req, res) => {
+router.get(``, async (req, res) => {
     try {
 
         /* ---Get All Post with Pagination--- */
@@ -59,14 +55,14 @@ router.get(`/all-post`, async (req, res) => {
 
 router.get(`/post/:id`, async (req, res) => {
     try {
-        let slug = req.params.id
-        const data = await Post.findById({ _id: slug })
+        let id = req.params.id
+        const data = await Post.findById(id)
 
         const local = {
             title: data.title,
         }
 
-        res.render(`detail`, { local, g })
+        res.render(`detail`, { local, data })
 
     } catch (error) {
         console.log(`ERROR : ${error}`)
