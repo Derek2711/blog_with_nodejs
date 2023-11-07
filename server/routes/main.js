@@ -6,18 +6,25 @@ const Post = require("../models/Post");
 const morgan = require(`morgan`);
 
 router.use(morgan(`dev`));
+router.use(express.urlencoded({ extended: true }))
 
 /**
  * GET/
  * Home
  */
-router.get(``, async (req, res) => {
-    try {
-        const local = {
-            title: `Personal blog with Nodejs`,
-            desc: `Building a blog with Node, Express and MongoDB`
-        }
+const local = {
+    title: `Personal blog with Nodejs`,
+    desc: `Building a blog with Node, Express and MongoDB`
+}
 
+router.get(``, (req, res) => {
+    res.redirect(`all-post`)
+})
+
+router.get(`/all-post`, async (req, res) => {
+    try {
+
+        /* ---Get All Post with Pagination--- */
         const perPage = 5;
         let page = req.query.page || 1;
 
@@ -37,6 +44,7 @@ router.get(``, async (req, res) => {
             nextPage: hasNextPage ? nextPage : null,
             previousPage: page - 1
         });
+        /* ----------- */
 
     } catch (error) {
         console.log(`ERROR : ${error}`)
@@ -58,7 +66,7 @@ router.get(`/post/:id`, async (req, res) => {
             title: data.title,
         }
 
-        res.render(`post`, { local, data })
+        res.render(`detail`, { local, g })
 
     } catch (error) {
         console.log(`ERROR : ${error}`)
@@ -68,15 +76,18 @@ router.get(`/post/:id`, async (req, res) => {
 
 
 router.get(`/about`, (req, res) => {
-    res.render(`about`)
+    res.render(`about`, { local })
 })
 
 router.get(`/contact`, (req, res) => {
-    res.render(`contact`)
+    res.render(`contact`, { local })
 })
 
 router.use((req, res) => {
-    res.status(400).render(`404`)
+    const local = {
+        title: `404`
+    }
+    res.status(404).render(`404`, { local })
 })
 
 module.exports = router
