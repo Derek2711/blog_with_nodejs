@@ -76,7 +76,7 @@ router.post(`/admin`, async (req, res) => {
 })
 
 /**
- * POST/
+ * GET/
  * Admin- Dashboard
  */
 router.get(`/dashboard`, authMiddleware, async (req, res) => {
@@ -84,7 +84,20 @@ router.get(`/dashboard`, authMiddleware, async (req, res) => {
         const local = {
             title: `Admin Dashboard`
         }
-        res.render(`admin/dashboard`, { local })
+        const data = await Post.find().sort({ createdAt: -1 })
+        res.render(`admin/dashboard`, { local, data })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+/**
+ * POST/
+ * Admin- Add Post
+ */
+router.post(`/add-post`, async (req, res) => {
+    try {
+        res.send(`Add-Post`)
     } catch (error) {
         console.log(error)
     }
