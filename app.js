@@ -1,18 +1,35 @@
 // Require .env as config
 require(`dotenv`).config()
 
-const router = require(`./server/routes/main`)
 const connectDB = require(`./server/config/db`)
 
 const express = require(`express`)
 const expresslayout = require(`express-ejs-layouts`)
+const cookieParser = require(`cookie-parser`)
+const mongoStore = require(`connect-mongo`)
+const session = require("express-session")
 
 const app = express()
 // || Port for production in server
-const PORT = 8000 || process.env.PORT
+const PORT = process.env.PORT
 
 // Connect to MongoDB
 connectDB()
+
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+app.use(cookieParser())
+
+// Basic Session
+app.use(session({
+    secret: `keyboard cat`,
+    resave: false,
+    saveUninitialized: true,
+    store: mongoStore.create({
+        mongoUrl: process.env.MONGODB_URI
+    })
+    //cookie: { maxAge: new Date ( Date.now() + (3600000) ) } 
+}))
 
 // Public folder for js, css, images
 app.use(express.static(`public`))
@@ -23,7 +40,17 @@ app.set(`layout`, `./layouts/main`)
 app.set(`view engine`, `ejs`)
 
 // For routes components
-app.use(`/`, router)
+app.use(`/`, require(`./server/routes/main`))
+app.use(`/`, require(`./server/routes/admin`))
+
+// For 404 not found
+app.use((req, res) => {
+    const local = {
+        title: `404`
+    }
+    res.status(404).render(`404`, { local })
+})
+
 
 app.listen(PORT, () => {
     console.log(`Server is running at port ${PORT}`)
