@@ -106,11 +106,6 @@ router.get(`/contact`, (req, res) => {
     res.render(`contact`, { local })
 })
 
-router.use((req, res) => {
-    const local = {
-        title: `404`
-    }
-    res.status(404).render(`404`, { local })
-})
+
 
 module.exports = router
