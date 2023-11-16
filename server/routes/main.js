@@ -16,7 +16,7 @@ const local = {
     desc: `Building a blog with Node, Express and MongoDB`
 }
 
-router.get(``, async (req, res) => {
+router.get(`/`, async (req, res) => {
     try {
 
         /* ---Get All Post with Pagination--- */
@@ -37,7 +37,8 @@ router.get(``, async (req, res) => {
             data,
             current: page,
             nextPage: hasNextPage ? nextPage : null,
-            previousPage: page - 1
+            previousPage: page - 1,
+            currentRoute : '/'
         });
         /* ----------- */
 
@@ -61,10 +62,10 @@ router.get(`/post/:id`, async (req, res) => {
             title: data.title,
         }
 
-        res.render(`detail`, { local, data })
+        res.render(`detail`, { local, data, currentRoute : `/post/${id}` })
 
     } catch (error) {
-        console.log(`ERROR : ${error}`)
+        res.render(`404`, {local})
     }
 
 });
@@ -79,6 +80,8 @@ router.post(`/search`, async (req, res) => {
             title: `Search`,
         }
         let searchTerm = req.body.searchTerm
+
+        // Remove special character from searchterm
         const searchNoSpecialChar = searchTerm.replace(/[^a-zA-Z0-9]/g, "")
 
         // Search from database
@@ -95,15 +98,12 @@ router.post(`/search`, async (req, res) => {
 })
 
 
-
-
-
 router.get(`/about`, (req, res) => {
-    res.render(`about`, { local })
+    res.render(`about`, { local, currentRoute : `/about` })
 })
 
 router.get(`/contact`, (req, res) => {
-    res.render(`contact`, { local })
+    res.render(`contact`, { local, currentRoute : `/contact` })
 })
 
 
