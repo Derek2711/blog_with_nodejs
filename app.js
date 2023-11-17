@@ -25,7 +25,7 @@ app.use(methodOverride(`_method`))
 
 // Basic Session
 app.use(session({
-    secret: `keyboard cat`,
+    secret: `pussy cat`,
     resave: false,
     saveUninitialized: true,
     store: mongoStore.create({
